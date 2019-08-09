@@ -48,15 +48,15 @@ namespace API_AtivosCeb.Controllers
             }
         }
 
-        public void DeleteCategorias(int id)
+        public void DeleteCategorias(int idCategoria)
         {
-            categorias item = repositorio.Get(id);
+            categorias item = repositorio.Get(idCategoria);
 
             if (item == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            repositorio.Remove(id);
+            repositorio.Remove(idCategoria);
         }
     }
 }

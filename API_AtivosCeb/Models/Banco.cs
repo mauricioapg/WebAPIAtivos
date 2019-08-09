@@ -11,6 +11,21 @@ namespace API_AtivosCeb.Models
     {
         public static string conexao = @"Data Source=den1.mssql8.gear.host;Initial Catalog=ativosceb;User ID=ativosceb;Password=Ce506?9?V67l;";
 
+        public static int RemoverCategoria(int idCategoria)
+        {
+            string sql = "DeletarCategoria";
+
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idCategoria", idCategoria);
+                con.Open();
+                idCategoria = Convert.ToInt32(comando.ExecuteScalar());
+            }
+            return idCategoria;
+        }
+
         public static List<categorias> ListarCategorias()
         {
             categorias categorias;

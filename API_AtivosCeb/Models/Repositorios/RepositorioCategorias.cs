@@ -27,9 +27,9 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarCategorias();
         }
 
-        public void Remove(int id)
+        public void Remove(int idCategoria)
         {
-            throw new NotImplementedException();
+            Banco.RemoverCategoria(idCategoria: idCategoria);
         }
 
         public bool Update(categorias item)
