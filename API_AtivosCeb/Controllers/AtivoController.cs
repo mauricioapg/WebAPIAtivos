@@ -33,14 +33,19 @@ namespace API_AtivosCeb.Controllers
             return repositorio.GetLocal(idLocal);
         }
 
-        public ativos GetAtivosPiso(int idPiso)
+        public IEnumerable<ativos> GetAtivosPiso(int idPiso)
         {
-            ativos item = repositorio.GetPiso(idPiso);
-            if (item == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            return item;
+            return repositorio.GetPiso(idPiso);
+        }
+
+        public IEnumerable<ativos> GetAtivosFabricante(int idFabricante)
+        {
+            return repositorio.GetFabricante(idFabricante);
+        }
+
+        public IEnumerable<ativos> GetAtivosCategoria(int idCategoria)
+        {
+            return repositorio.GetCategoria(idCategoria);
         }
 
         public ativos GetAtivosPatrimonio(int patrimonio)
@@ -81,7 +86,6 @@ namespace API_AtivosCeb.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-
             repositorio.Remove(id);
         }
     }

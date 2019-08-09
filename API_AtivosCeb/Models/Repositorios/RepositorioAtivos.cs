@@ -27,9 +27,19 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarAtivos().FindAll(p => p.idLocal == idLocal);
         }
 
-        public ativos GetPiso(int idPiso)
+        public IEnumerable<ativos> GetPiso(int idPiso)
         {
-            return Banco.ListarAtivos().Find(p => p.idPiso == idPiso);
+            return Banco.ListarAtivos().FindAll(p => p.idPiso == idPiso);
+        }
+
+        public IEnumerable<ativos> GetFabricante(int idFabricante)
+        {
+            return Banco.ListarAtivos().FindAll(p => p.idFabricante == idFabricante);
+        }
+
+        public IEnumerable<ativos> GetCategoria(int idCategoria)
+        {
+            return Banco.ListarAtivos().FindAll(p => p.idCategoria == idCategoria);
         }
 
         public ativos GetPatrimonio(int patrimonio)
