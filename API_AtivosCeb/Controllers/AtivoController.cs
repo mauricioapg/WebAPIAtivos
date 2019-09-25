@@ -58,6 +58,26 @@ namespace API_AtivosCeb.Controllers
             return item;
         }
 
+        public ativos GetAtivosNumeroSerie(string numeroSerie)
+        {
+            ativos item = repositorio.GetNumeroSerie(numeroSerie);
+            if (item == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return item;
+        }
+
+        public ativos GetAtivosServiceTag(string serviceTag)
+        {
+            ativos item = repositorio.GetServiceTag(serviceTag);
+            if (item == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return item;
+        }
+
         [ActionName("Inserir")]
         public HttpResponseMessage PostAtivos(ativos item)
         {

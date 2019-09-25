@@ -187,6 +187,7 @@
     <Compile Include="Controllers\FabricanteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
+    <Compile Include="Controllers\PisoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,6 +200,7 @@
     <Compile Include="Models\Interfaces\InterfaceCategorias.cs" />
     <Compile Include="Models\Interfaces\InterfaceFabricantes.cs" />
     <Compile Include="Models\Interfaces\InterfaceLocais.cs" />
+    <Compile Include="Models\Interfaces\InterfacePisos.cs" />
     <Compile Include="Models\locais.cs" />
     <Compile Include="Models\logs.cs" />
     <Compile Include="Models\pisos.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="Models\Repositorios\RepositorioCategorias.cs" />
     <Compile Include="Models\Repositorios\RepositorioFabricantes.cs" />
     <Compile Include="Models\Repositorios\RepositorioLocais.cs" />
+    <Compile Include="Models\Repositorios\RepositorioPisos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

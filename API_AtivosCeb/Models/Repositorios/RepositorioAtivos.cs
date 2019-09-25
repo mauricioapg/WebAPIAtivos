@@ -42,6 +42,16 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarAtivos().FindAll(p => p.idCategoria == idCategoria);
         }
 
+        public ativos GetNumeroSerie(string numeroSerie)
+        {
+            return Banco.ListarAtivos().Find(p => p.numeroSerie == numeroSerie);
+        }
+
+        public ativos GetServiceTag(string serviceTag)
+        {
+            return Banco.ListarAtivos().Find(p => p.serviceTag == serviceTag);
+        }
+
         public ativos GetPatrimonio(int patrimonio)
         {
             return Banco.ListarAtivos().Find(p => p.patrimonio == patrimonio);

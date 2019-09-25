@@ -28,6 +28,11 @@ namespace API_AtivosCeb.Controllers
             return item;
         }
 
+        public String GetDescricao (int idCategoria)
+        {
+            return Banco.ObterDescricaoCategorias(idCategoria);
+        }
+
         [ActionName("Inserir")]
         public HttpResponseMessage PostCategorias(categorias item)
         {

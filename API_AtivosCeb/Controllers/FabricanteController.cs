@@ -29,14 +29,24 @@ namespace API_AtivosCeb.Controllers
         }
 
         [ActionName("Inserir")]
-        public HttpResponseMessage PostFabricantes(fabricantes item)
+        public IHttpActionResult PostFabricantes([FromBody]fabricantes item)
         {
-            item = repositorio.Add(item);
-            var response = Request.CreateResponse<fabricantes>(HttpStatusCode.Created, item);
+            //item = repositorio.Add(item);
+            //var response = Request.CreateResponse<fabricantes>(HttpStatusCode.Created, item);
 
-            string uri = Url.Link("DefaultApi", new { id = item.idFabricante });
-            response.Headers.Location = new Uri(uri);
-            return response;
+            //string uri = Url.Link("DefaultApi", new { id = item.idFabricante });
+            //response.Headers.Location = new Uri(uri);
+            //return response;
+
+            fabricantes fabricante = repositorio.GetAll().FirstOrDefault(l => l.idFabricante == item.idFabricante);
+
+            if (fabricante != null)
+                return ResponseMessage(Request.CreateResponse<string>(HttpStatusCode.Conflict, "Já existe um fabricante cadastrado com esse ID."));
+            else
+            {
+                repositorio.Add(item);
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK));
+            }
         }
 
         public void PutFabricantes(int id, fabricantes fabricantes)
