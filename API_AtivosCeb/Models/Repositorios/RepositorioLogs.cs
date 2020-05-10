@@ -5,31 +5,26 @@ using System.Web;
 
 namespace API_AtivosCeb.Models.Repositorios
 {
-    public class RepositorioPisos: Interfaces.InterfacePisos
+    public class RepositorioLogs : Interfaces.InterfaceLogs
     {
-        public pisos Add(pisos item)
+        public logs Add(logs item)
         {
             if (item == null)
             {
                 throw new ArgumentNullException("item");
             }
-            Banco.InserirPiso(item);
+            Banco.InserirLog(item);
             return item;
         }
 
-        public pisos Get(int id)
+        public logs Get(int id)
         {
-            return Banco.ListarPisos().Find(p => p.idPiso == id);
+            return Banco.ListarLogs().Find(p => p.idLogs == id);
         }
 
-        public String GetDescPisoPorId(int id)
+        public IEnumerable<logs> GetAll()
         {
-            return Banco.ObterDescPisoPorId(id);
-        }
-
-        public IEnumerable<pisos> GetAll()
-        {
-            return Banco.ListarPisos();
+            return Banco.ListarLogs();
         }
 
         public void Remove(int id)
@@ -37,7 +32,7 @@ namespace API_AtivosCeb.Models.Repositorios
             throw new NotImplementedException();
         }
 
-        public bool Update(pisos item)
+        public bool Update(logs item)
         {
             throw new NotImplementedException();
         }

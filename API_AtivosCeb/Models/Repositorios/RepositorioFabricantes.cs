@@ -22,6 +22,11 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarFabricantes().Find(p => p.idFabricante == id);
         }
 
+        public String GetDescFabricantePorId(int id)
+        {
+            return Banco.ObterDescFabricantePorId(id);
+        }
+
         public IEnumerable<fabricantes> GetAll()
         {
             return Banco.ListarFabricantes();

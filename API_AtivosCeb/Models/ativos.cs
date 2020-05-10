@@ -23,6 +23,5 @@ namespace API_AtivosCeb.Models
         public int patrimonio { get; set; }
         public string garantia { get; set; }
         public string numeroSerie { get; set; }
-        public string notaFiscal { get; set; }
     }
 }

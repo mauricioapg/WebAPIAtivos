@@ -22,6 +22,11 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarLocais().Find(p => p.idLocal == id);
         }
 
+        public String GetDescLocalPorId(int id)
+        {
+            return Banco.ObterDescLocalPorId(id);
+        }
+
         public IEnumerable<locais> GetAll()
         {
             return Banco.ListarLocais();

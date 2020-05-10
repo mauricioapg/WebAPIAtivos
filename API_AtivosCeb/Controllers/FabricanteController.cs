@@ -28,6 +28,11 @@ namespace API_AtivosCeb.Controllers
             return item;
         }
 
+        public String GetDescricaoFabricante(int idFabricante)
+        {
+            return repositorio.GetDescFabricantePorId(idFabricante);
+        }
+
         [ActionName("Inserir")]
         public IHttpActionResult PostFabricantes([FromBody]fabricantes item)
         {

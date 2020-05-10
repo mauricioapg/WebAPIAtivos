@@ -19,6 +19,13 @@ namespace API_AtivosCeb
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+               name: "RouteApi",
+               routeTemplate: "api/{controller}/{action}/{id}",
+               defaults: new { id = RouteParameter.Optional }
+           );
+
             var formatters = GlobalConfiguration.Configuration.Formatters;
             formatters.Remove(formatters.XmlFormatter);
         }

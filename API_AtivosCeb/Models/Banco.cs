@@ -26,15 +26,15 @@ namespace API_AtivosCeb.Models
             return idCategoria;
         }
 
-        public static String ObterDescricaoCategorias(int idCategoria)
+        public static List<reparos> ListarReparos()
         {
-            String descricao = "";
-            string sql = "ObterDescricaoCategorias";
+            reparos reparos;
+            List<reparos> listarReparos = new List<reparos>();
+            string sql = "ListarReparos";
             using (var con = new SqlConnection(conexao))
             {
                 var comando = new SqlCommand(sql, con);
                 comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.AddWithValue("@idCategoria", idCategoria);
                 SqlDataReader read;
                 con.Open();
 
@@ -42,10 +42,17 @@ namespace API_AtivosCeb.Models
                 {
                     while (read.Read())
                     {
-                        descricao = read["descCategoria"].ToString();
+                        reparos = new reparos();
+                        reparos.idReparo = Convert.ToInt32(read["ID"]);
+                        reparos.idAtivo = Convert.ToInt32(read["idAtivo"].ToString());
+                        reparos.dataEnvio = read["dataEnvio"].ToString();
+                        reparos.dataRetorno = read["dataRetorno"].ToString();
+                        reparos.descDefeito = read["descDefeito"].ToString();
+                        reparos.situacao = read["situacao"].ToString();
+                        listarReparos.Add(reparos);
                     }
                 }
-                return descricao;
+                return listarReparos;
             }
         }
 
@@ -72,6 +79,190 @@ namespace API_AtivosCeb.Models
                     }
                 }
                 return listarCategorias;
+            }
+        }
+
+        public static String ObterDescCategoriaPorId(int idCategoria)
+        {
+            String descCategoria = "";
+            string sql = "ObterDescCategoriaPorId";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idCategoria", idCategoria);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {                        
+                        descCategoria = read["DescCategoria"].ToString();
+                    }
+                }
+                return descCategoria;
+            }
+        }
+
+        public static String ObterDescFabricantePorId(int idFabricante)
+        {
+            String descFabricante = "";
+            string sql = "ObterDescFabricantePorId";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idFabricante", idFabricante);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        descFabricante = read["DescFabricante"].ToString();
+                    }
+                }
+                return descFabricante;
+            }
+        }
+
+        public static String ObterDescLocalPorId(int idLocal)
+        {
+            String descLocal = "";
+            string sql = "ObterDescLocalPorId";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idLocal", idLocal);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        descLocal = read["DescLocal"].ToString();
+                    }
+                }
+                return descLocal;
+            }
+        }
+
+        public static String ObterDescPisoPorId(int idPiso)
+        {
+            String descPiso = "";
+            string sql = "ObterDescPisoPorId";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idPiso", idPiso);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        descPiso = read["DescPiso"].ToString();
+                    }
+                }
+                return descPiso;
+            }
+        }
+
+        public static int ObterIdPisoPorDescricao(string descPiso)
+        {
+            int idPiso = 0;
+            string sql = "ObterIdPisoPorDescricao";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@descPiso", descPiso);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        idPiso = Convert.ToInt32(read["ID"]);
+                    }
+                }
+                return idPiso;
+            }
+        }
+
+        public static int ObterIdLocalPorDescricao(string descLocal)
+        {
+            int idLocal = 0;
+            string sql = "ObterIdLocalPorDescricao";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@descLocal", descLocal);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        idLocal = Convert.ToInt32(read["ID"]);
+                    }
+                }
+                return idLocal;
+            }
+        }
+
+        public static int ObterIdFabricantePorDescricao(string descFabricante)
+        {
+            int idFabricante = 0;
+            string sql = "ObterIdFabricantePorDescricao";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@descFabricante", descFabricante);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        idFabricante = Convert.ToInt32(read["ID"]);
+                    }
+                }
+                return idFabricante;
+            }
+        }
+
+        public static int ObterIdCategoriaPorDescricao(string descCategoria)
+        {
+            int idCategoria = 0;
+            string sql = "ObterIdCategoriaPorDescricao";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@descCategoria", descCategoria);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        idCategoria = Convert.ToInt32(read["ID"].ToString());
+                    }
+                }
+                return idCategoria;
             }
         }
 
@@ -153,6 +344,59 @@ namespace API_AtivosCeb.Models
             }
         }
 
+        public static List<logs> ListarLogs()
+        {
+            logs logs;
+            List<logs> listarLogs = new List<logs>();
+            string sql = "ListarLogs";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        logs = new logs();
+                        logs.idLogs = Convert.ToInt32(read["ID"].ToString());
+                        logs.data = read["data"].ToString();
+                        logs.hora = read["hora"].ToString();
+                        logs.usuario = read["usuario"].ToString();
+                        logs.mensagem = read["mensagem"].ToString();
+                        logs.idAtivo = Convert.ToInt32(read["idAtivo"].ToString());
+                        listarLogs.Add(logs);
+                    }
+                }
+                return listarLogs;
+            }
+        }
+
+        public static List<string> ListarModelos(int idCategoria)
+        {
+            List<string> listarModelos = new List<string>();
+            string sql = "ListarModelos";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idCategoria", idCategoria);
+                SqlDataReader read;
+                con.Open();
+
+                using (read = comando.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        listarModelos.Add(read["modelo"].ToString());
+                    }
+                }
+                return listarModelos;
+            }
+        }
+
         public static List<ativos> ListarAtivos()
         {
             ativos ativos;
@@ -172,21 +416,20 @@ namespace API_AtivosCeb.Models
                         ativos = new ativos();
                         ativos.idAtivo = Convert.ToInt32(read["ID"]);
                         ativos.item = read["item"].ToString();
-                        ativos.idPiso = Convert.ToInt32(read["idPiso"].ToString());
-                        ativos.idLocal = Convert.ToInt32(read["idLocal"].ToString());
-                        ativos.idFabricante = Convert.ToInt32(read["idFabricante"].ToString());
+                        ativos.idPiso = Convert.ToInt32(read["idPiso"]);
+                        ativos.idLocal = Convert.ToInt32(read["idLocal"]);
+                        ativos.idFabricante = Convert.ToInt32(read["idFabricante"]);
                         ativos.modelo = read["modelo"].ToString();
                         ativos.comentarios = read["comentarios"].ToString();
                         ativos.dataRetirada = read["dataRetirada"].ToString();
                         ativos.dataRegistro = read["dataRegistro"].ToString();
                         ativos.valor = Convert.ToDecimal(read["valor"].ToString());
                         ativos.condicao = read["condicao"].ToString();
-                        ativos.idCategoria = Convert.ToInt32(read["idCategoria"].ToString());
+                        ativos.idCategoria = Convert.ToInt32(read["idCategoria"]);
                         ativos.serviceTag = read["serviceTag"].ToString();
                         ativos.patrimonio = Convert.ToInt32(read["patrimonio"].ToString());
                         ativos.garantia = read["garantia"].ToString();
                         ativos.numeroSerie = read["numeroSerie"].ToString();
-                        ativos.notaFiscal = read["notaFiscal"].ToString();
                         listarAtivos.Add(ativos);
                     }
                 }
@@ -254,10 +497,35 @@ namespace API_AtivosCeb.Models
             return pisos.idPiso;
         }
 
+        public static int AtualizarAtivo(ativos ativos)
+        {
+            string sql = "AtualizarAtivo";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idAtivo", ativos.idAtivo);
+                comando.Parameters.AddWithValue("@item", ativos.item);
+                comando.Parameters.AddWithValue("@idPiso", ativos.idPiso);
+                comando.Parameters.AddWithValue("@idLocal", ativos.idLocal);
+                comando.Parameters.AddWithValue("@idFabricante", ativos.idFabricante);
+                comando.Parameters.AddWithValue("@modelo", ativos.modelo);
+                comando.Parameters.AddWithValue("@comentarios", ativos.comentarios);
+                comando.Parameters.AddWithValue("@valor", ativos.valor);
+                comando.Parameters.AddWithValue("@condicao", ativos.condicao);
+                comando.Parameters.AddWithValue("@idCategoria", ativos.idCategoria);
+                comando.Parameters.AddWithValue("@serviceTag", ativos.serviceTag);
+                comando.Parameters.AddWithValue("@patrimonio", ativos.patrimonio);
+                comando.Parameters.AddWithValue("@numeroSerie", ativos.numeroSerie);
+                con.Open();
+                ativos.idAtivo = Convert.ToInt32(comando.ExecuteScalar());
+            }
+            return ativos.idAtivo;
+        }
+
         public static int InserirAtivo(ativos ativos)
         {
             string sql = "InserirAtivo";
-
             using (var con = new SqlConnection(conexao))
             {
                 var comando = new SqlCommand(sql, con);
@@ -275,6 +543,101 @@ namespace API_AtivosCeb.Models
                 comando.Parameters.AddWithValue("@serviceTag", ativos.serviceTag);
                 comando.Parameters.AddWithValue("@patrimonio", ativos.patrimonio);
                 comando.Parameters.AddWithValue("@garantia", ativos.garantia);
+                comando.Parameters.AddWithValue("@numeroSerie", ativos.numeroSerie);
+                con.Open();
+                ativos.idAtivo = Convert.ToInt32(comando.ExecuteScalar());
+            }
+            return ativos.idAtivo;
+        }
+
+        public static int InserirReparo(reparos reparo)
+        {
+            string sql = "InserirReparo";
+
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idAtivo", reparo.idAtivo);
+                comando.Parameters.AddWithValue("@dataEnvio", reparo.dataEnvio);
+                comando.Parameters.AddWithValue("@descDefeito", reparo.descDefeito);
+                comando.Parameters.AddWithValue("@situacao", reparo.situacao);
+                con.Open();
+                reparo.idReparo = Convert.ToInt32(comando.ExecuteScalar());
+            }
+            return reparo.idReparo;
+        }
+
+        public static int InserirLog(logs log)
+        {
+            string sql = "InserirLog";
+
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;                
+                comando.Parameters.AddWithValue("@data", log.data);
+                comando.Parameters.AddWithValue("@hora", log.hora);
+                comando.Parameters.AddWithValue("@usuario", log.usuario);
+                comando.Parameters.AddWithValue("@mensagem", log.mensagem);
+                comando.Parameters.AddWithValue("@idAtivo", log.idAtivo);
+                con.Open();
+                log.idLogs = Convert.ToInt32(comando.ExecuteScalar());
+            }
+            return log.idLogs;
+        }
+
+        public static int AlterarCondicao(ativos ativos)
+        {
+            string sql = "AlterarCondicao";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idAtivo", ativos.idAtivo);
+                comando.Parameters.AddWithValue("@condicao", ativos.condicao);
+                con.Open();
+                ativos.idAtivo = Convert.ToInt32(comando.ExecuteScalar());
+            }
+            return ativos.idAtivo;
+        }
+
+        public static int FinalizarReparo(reparos reparos)
+        {
+            string sql = "FinalizarReparo";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idReparo", reparos.idReparo);
+                comando.Parameters.AddWithValue("@dataRetorno", reparos.dataRetorno);
+                comando.Parameters.AddWithValue("@situacao", reparos.situacao);
+                con.Open();
+                reparos.idReparo = Convert.ToInt32(comando.ExecuteScalar());
+            }
+            return reparos.idReparo;
+        }
+
+        public static int DescontinuarAtivo(ativos ativos)
+        {
+            string sql = "DescontinuarAtivo";
+            using (var con = new SqlConnection(conexao))
+            {
+                var comando = new SqlCommand(sql, con);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idAtivo", ativos.idAtivo);
+                comando.Parameters.AddWithValue("@item", ativos.item);
+                comando.Parameters.AddWithValue("@idPiso", ativos.idPiso);
+                comando.Parameters.AddWithValue("@idLocal", ativos.idLocal);
+                comando.Parameters.AddWithValue("@idFabricante", ativos.idFabricante);
+                comando.Parameters.AddWithValue("@modelo", ativos.modelo);
+                comando.Parameters.AddWithValue("@comentarios", ativos.comentarios);
+                comando.Parameters.AddWithValue("@dataRetirada", ativos.dataRetirada);
+                comando.Parameters.AddWithValue("@valor", ativos.valor);
+                comando.Parameters.AddWithValue("@condicao", ativos.condicao);
+                comando.Parameters.AddWithValue("@idCategoria", ativos.idCategoria);
+                comando.Parameters.AddWithValue("@serviceTag", ativos.serviceTag);
+                comando.Parameters.AddWithValue("@patrimonio", ativos.patrimonio);
                 comando.Parameters.AddWithValue("@numeroSerie", ativos.numeroSerie);
                 con.Open();
                 ativos.idAtivo = Convert.ToInt32(comando.ExecuteScalar());

@@ -28,6 +28,11 @@ namespace API_AtivosCeb.Controllers
             return item;
         }
 
+        public String GetDescricaoLocal(int idLocal)
+        {
+            return repositorio.GetDescLocalPorId(idLocal);
+        }
+
         [ActionName("Inserir")]
         public HttpResponseMessage PostLocais(locais item)
         {

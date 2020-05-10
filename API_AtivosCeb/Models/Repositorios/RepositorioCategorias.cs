@@ -22,6 +22,11 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarCategorias().Find(p => p.idCategoria == id);
         }
 
+        public String GetDescCategoriaPorId(int id)
+        {
+            return Banco.ObterDescCategoriaPorId(id);
+        }
+
         public IEnumerable<categorias> GetAll()
         {
             return Banco.ListarCategorias();

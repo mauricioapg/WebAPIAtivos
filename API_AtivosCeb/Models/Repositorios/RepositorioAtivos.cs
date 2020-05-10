@@ -22,6 +22,16 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarAtivos().Find(p => p.idAtivo == id);
         }
 
+        public IEnumerable<ativos> GetCondicao(string condicao)
+        {
+            return Banco.ListarAtivos().FindAll(p => p.condicao == condicao);
+        }
+
+        //public IEnumerable<string> GetModelosCategoria(int idCategoria)
+        //{
+        //    return Banco.ListarModelos().FindAll(p => p.idCategoria == idCategoria);
+        //}
+
         public IEnumerable<ativos> GetLocal(int idLocal)
         {
             return Banco.ListarAtivos().FindAll(p => p.idLocal == idLocal);
@@ -57,6 +67,21 @@ namespace API_AtivosCeb.Models.Repositorios
             return Banco.ListarAtivos().Find(p => p.patrimonio == patrimonio);
         }
 
+        public IEnumerable<ativos> GetPisoCategoria(int idPiso, int idCategoria)
+        {
+            return Banco.ListarAtivos().FindAll(p => p.idPiso == idPiso && p.idCategoria == idCategoria);
+        }
+
+        public IEnumerable<ativos> GetCategoriaFabricante(int idCategoria, int idFabricante)
+        {
+            return Banco.ListarAtivos().FindAll(p => p.idCategoria == idCategoria && p.idFabricante == idFabricante);
+        }
+
+        public IEnumerable<ativos> GetCategoriaPisoFabricante(int idCategoria, int idPiso, int idFabricante)
+        {
+            return Banco.ListarAtivos().FindAll(p => p.idCategoria == idCategoria && p.idPiso == idPiso && p.idFabricante == idFabricante);
+        }
+
         public IEnumerable<ativos> GetAll()
         {
             return Banco.ListarAtivos();
@@ -69,7 +94,47 @@ namespace API_AtivosCeb.Models.Repositorios
 
         public bool Update(ativos item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+            int index = Banco.ListarAtivos().FindIndex(p => p.idAtivo == item.idAtivo);
+            if (index == -1)
+            {
+                return false;
+            }
+            Banco.AtualizarAtivo(item);
+            return true;
+        }
+
+        public bool UpdateDescontinuar(ativos item)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+            int index = Banco.ListarAtivos().FindIndex(p => p.idAtivo == item.idAtivo);
+            if (index == -1)
+            {
+                return false;
+            }
+            Banco.DescontinuarAtivo(item);
+            return true;
+        }
+
+        public bool UpdateCondicao(ativos item)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+            int index = Banco.ListarAtivos().FindIndex(p => p.idAtivo == item.idAtivo);
+            if (index == -1)
+            {
+                return false;
+            }
+            Banco.AlterarCondicao(item);
+            return true;
         }
     }
 }

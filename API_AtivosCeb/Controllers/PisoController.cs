@@ -28,6 +28,11 @@ namespace API_AtivosCeb.Controllers
             return item;
         }
 
+        public String GetDescricaoPiso(int idPiso)
+        {
+            return repositorio.GetDescPisoPorId(idPiso);
+        }
+
         [ActionName("Inserir")]
         public HttpResponseMessage PostPisos(pisos item)
         {

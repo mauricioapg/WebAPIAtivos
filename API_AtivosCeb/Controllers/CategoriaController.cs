@@ -28,9 +28,9 @@ namespace API_AtivosCeb.Controllers
             return item;
         }
 
-        public String GetDescricao (int idCategoria)
+        public String GetDescricaoCategoria (int idCategoria)
         {
-            return Banco.ObterDescricaoCategorias(idCategoria);
+            return repositorio.GetDescCategoriaPorId(idCategoria);
         }
 
         [ActionName("Inserir")]
